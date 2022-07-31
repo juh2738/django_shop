@@ -1,8 +1,16 @@
+from itertools import product
+from django.views.generic import ListView
 from django.shortcuts import render, redirect
+from fcuser.decorators import login_required
+from fcuser.decorators import login_required
 from .forms import RegisterForm
 from django.views.generic.edit import FormView
+from .models import Order
+from django.utils.decorators import method_decorator
+
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch')
 class OrderCreate(FormView):
     form_class = RegisterForm
     success_url = '/product/'
@@ -16,3 +24,17 @@ class OrderCreate(FormView):
             'request': self.request
         })
         return kw
+
+@method_decorator(login_required, name='dispatch')
+class OrderList(ListView):
+    model = Order
+    template_name = 'order.html'
+    context_object_name = 'order_list'
+
+    def get_queryset(self, **kwargs):
+        queryset = Order.objects.filter(fcuser__email=self.request.session.get('user'))
+        return queryset
+
+
+
+    

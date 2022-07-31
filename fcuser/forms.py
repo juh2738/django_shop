@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import check_password, make_password
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(
-        error_messages={
+        error_messages={1
             'required':'이메일을 입력해주세요.'
         },
         max_length=64, label='이메일'

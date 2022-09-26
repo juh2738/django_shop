@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 BATON = {
-    
+    'SITE_HEADER': '패스트캠퍼스 백오피스',
+    'SITE_TITLE': '패스트캠퍼스 백오피스',
+    'INDEX_TITLE': '패스트캠퍼스 백오피스',
     'SUPPORT_HREF' : 'https://fastcampus.co.kr',
     'COPYRIGHT' : 'copyright © 2022 fastcampus',
     'POWERED_BY' : '<a href="https://fastcampus.co.kr">Fastcampus</a>',
@@ -70,7 +73,9 @@ ROOT_URLCONF = 'fc_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
